@@ -1,8 +1,8 @@
 const express = require('express');
 const { getRandomVerseController } = require('../controllers/verses.controller')
 
-const router = express.Router();
+const route = express.Router();
 
-router.get('/home/verse', getRandomVerseController);
+route.get('/home/verse', getRandomVerseController);
 
-module.exports = router
+module.exports = route
