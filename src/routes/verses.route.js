@@ -1,5 +1,5 @@
 const express = require('express');
-const { getRandomVerseController } = require('../controller/verses.controller')
+const { getRandomVerseController } = require('../controllers/verses.controller')
 
 const router = express.Router();
 
