@@ -1,4 +1,4 @@
-const books = require('../database/livro.database')
+const books = require('../data/livros.data')
 const jsdom = require('jsdom');
 const {JSDOM} = jsdom;
 
