@@ -8,18 +8,12 @@ O projeto foi estruturado seguindo boas práticas de arquitetura backend, com se
 Disponibilizar a definição das palavras presentes no versículo retornado, auxiliando ainda mais no aprendizado do idioma.
 
 🔗 **API em produção:**  
-https://bible-api-jrdu.onrender.com/home/verse
-
-> ⚠️ Em breve a API será atualizada para:
-> `/api/v1/verses/random`
+https://bible-api-jrdu.onrender.com/api/v1/verses/random
 
 ## Tecnologias
 - Node.js
 - Express
 - JavaScript
-- Arquitetura em camadas
-- Tratamento global de erros
-- Versionamento de API
 
 ## Estrutura do projeto
 ```text
@@ -83,7 +77,7 @@ npm start
 Servidor padrão: `http://localhost:3000`
 
 ## 📌 Endpoint
-### `GET /home/verse`
+### `GET /api/v1/verses/random`
 Retorna um versículo aleatório de um capítulo aleatório da Bíblia.
 
 #### Exemplo de resposta de sucesso
@@ -94,7 +88,7 @@ Retorna um versículo aleatório de um capítulo aleatório da Bíblia.
     "livro": "João",
     "capitulo": 3,
     "versiculo": 15,
-    "texto": "...",
+    "texto": "..."
   }
 }
 ```
