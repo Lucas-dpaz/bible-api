@@ -50,7 +50,16 @@ function handleHtmlResponse (htmlText) {
     return objverso
 };
 
+function textToWords (text) {
+    const txt = text.toLowerCase();
+    let wordsList = txt.split(" ");
+    wordsList = wordsList.map(n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/[^\w]/g, ""));
+
+    return wordsList;
+}
+
 module.exports = {
     handleHtmlResponse,
-    bildRandomChapterUrl
+    bildRandomChapterUrl,
+    textToWords
 }
