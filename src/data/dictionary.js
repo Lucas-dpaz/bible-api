@@ -1,4 +1,4 @@
-export const spanishCommonBiblicalDictionary = [
+const spanishCommonBiblicalDictionary = [
   { word: "amor", meaning: "Sentimiento profundo de afecto y cuidado hacia otros." },
   { word: "vida", meaning: "Existencia de un ser desde su nacimiento hasta su muerte." },
   { word: "luz", meaning: "Claridad que permite ver; símbolo de verdad y esperanza." },
@@ -120,3 +120,5 @@ export const spanishCommonBiblicalDictionary = [
   { word: "nos", meaning: "Pronombre personal plural." },
   { word: "se", meaning: "Pronombre reflexivo." }
 ];
+
+module.exports = spanishCommonBiblicalDictionary
