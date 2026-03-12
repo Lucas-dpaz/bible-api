@@ -24,42 +24,44 @@ function bildRandomChapterUrl () {
 };
 
 function handleHtmlResponse (htmlText) {
+    if (!htmlText || typeof htmlText !== 'string') {
+        throw new Error('handleHtmlResponse recebeu htmlText inválido');
+    }
+
     const dom = new JSDOM(htmlText);
-
     const listaVersos = [];
-
     const versos = dom.window.document.querySelectorAll('p.p');
 
+    if (!versos || versos.length === 0) {
+        throw new Error('Nenhum elemento <p class="p"> encontrado no HTML');
+    }
 
     versos.forEach((p, index) => {
+        // limpa possíveis marcações internas
         p.querySelector('span.v')?.remove();
 
         listaVersos.push({
             verso: index + 1,
             conteudo: p.textContent.trim()
-        })
-    })
+        });
+    });
+
+    if (listaVersos.length === 0) {
+        throw new Error('Lista de versos ficou vazia após processamento');
+    }
 
     const numeroAlea = getRandomNumber(0, listaVersos.length - 1);
-    
     const objverso = {
         num: numeroAlea,
         texto: listaVersos[numeroAlea].conteudo
-    }
+    };
 
-    return objverso
+    return objverso;
 };
 
-function textToWords (text) {
-    const txt = text.toLowerCase();
-    let wordsList = txt.split(" ");
-    wordsList = wordsList.map(n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, "").replace(/[^\w]/g, ""));
 
-    return wordsList;
-}
 
 module.exports = {
     handleHtmlResponse,
-    bildRandomChapterUrl,
-    textToWords
+    bildRandomChapterUrl
 }
