@@ -16,16 +16,21 @@ const getVerse = async () => {
     }
 
     const apiResponse = await resposta.json();
-    let dadoBruto = apiResponse.data.content;
+    let dadoBruto = apiResponse.data?.content;
     
-    const verseObjectJson = await handleHtmlResponse(dadoBruto);
+    let verseObjectJson;
+    try {
+        verseObjectJson = await handleHtmlResponse(dadoBruto);
+    } catch (err) {
+        // transforma qualquer erro de parsing em AppError para o controller
+        throw new AppError('Erro ao interpretar conteúdo HTML do versículo', 502);
+    }
 
     const respostaFinal = {
         livro: objResposta.livro,
         capitulo: objResposta.capitulo,
         versiculo: verseObjectJson.num,
         texto: verseObjectJson.texto,
-        sigPalavras: [{palavra: 'qualquer palavra', significado: 'uma definição qualquer vou colocar exemplos tambem'}]
     }
 
     return respostaFinal;
