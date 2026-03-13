@@ -1,22 +1,29 @@
-﻿# Bible verses API
+# Bible Verses API
 
 API REST desenvolvida em Node.js e Express que retorna um versículo bíblico aleatório em espanhol, com foco no estudo do idioma aliado a reflexões bíblicas.
 
 O projeto foi estruturado seguindo boas práticas de arquitetura backend, com separação de responsabilidades, tratamento global de erros e versionamento de rotas.
 
-🚀 **Próxima feature planejada:** 
-Disponibilizar a definição das palavras presentes no versículo retornado, auxiliando ainda mais no aprendizado do idioma.
+Além do versículo, a API também pode retornar o significado das palavras presentes no texto, auxiliando no aprendizado de vocabulário em espanhol.
 
-🔗 **API em produção:**  
+API em produção:  
 https://bible-api-jrdu.onrender.com/api/v1/verses/random
 
-## Tecnologias
-- Node.js
-- Express
-- JavaScript
+---
 
-## Estrutura do projeto
-```text
+# Tecnologias
+
+- Node.js  
+- Express  
+- JavaScript  
+- API.Bible  
+- Lexicala API  
+
+---
+
+# Estrutura do projeto
+
+```
 src/
   app.js
   server.js
@@ -29,71 +36,126 @@ src/
   utils/
 ```
 
-### Camadas:
-- **Controllers** → Responsável por lidar com requisições e respostas
-- **Services** → Contém a regra de negócio
-- **Data** → Fonte de dados estática
-- **Middlewares** → Tratamento global de erros
-- **Utils** → Padronização das respostas da API
+## Camadas
 
-## 📋 Pré-requisitos
+Controllers  
+Responsável por lidar com requisições e respostas HTTP.
+
+Services  
+Contém a regra de negócio da aplicação.
+
+Data  
+Fonte de dados estática utilizada pela aplicação.
+
+Middlewares  
+Tratamento global de erros e interceptação de requisições.
+
+Utils  
+Funções auxiliares para padronização de respostas e manipulação de dados.
+
+---
+
+# Pré-requisitos
 
 Antes de executar o projeto, certifique-se de ter instalado:
 
-- **Node.js 18+** (recomendado)
-- Uma chave de API da [API.Bible](https://scripture.api.bible)
+- Node.js 18 ou superior
+- Uma chave de API da API.Bible
+- Uma chave da Lexicala API (RapidAPI)
 
-### 🔑 Obtendo a chave da API
+---
+
+# Obtendo as chaves de API
+
+API.Bible
 
 1. Acesse: https://scripture.api.bible  
 2. Crie uma conta  
 3. Gere sua chave de API  
-4. Adicione a chave no arquivo `.env`
 
-## Instalação
-```bash
+Lexicala
+
+1. Acesse https://rapidapi.com  
+2. Procure pela Lexicala API  
+3. Gere sua chave de acesso  
+
+---
+
+# Instalação
+
+```
 npm install
 ```
 
-## Variáveis de ambiente
+---
+
+# Variáveis de ambiente
+
 Crie um arquivo `.env` na raiz do projeto:
 
-```env
+```
 PORT=3000
 API_KEY=sua_chave_api_bible
+RAPID_API_KEY=sua_chave_lexicala
 ```
 
-## Como executar
-Ambiente de desenvolvimento (com nodemon):
-```bash
+---
+
+# Como executar
+
+Ambiente de desenvolvimento (com nodemon)
+
+```
 npm run dev
 ```
 
-Produção:
-```bash
+Produção
+
+```
 npm start
 ```
 
-Servidor padrão: `http://localhost:3000`
+Servidor padrão:
 
-## 📌 Endpoint
-### `GET /api/v1/verses/random`
+```
+http://localhost:3000
+```
+
+---
+
+# Endpoints
+
+## GET /api/v1/verses/random
+
 Retorna um versículo aleatório de um capítulo aleatório da Bíblia.
 
-#### Exemplo de resposta de sucesso
+### Exemplo de resposta
+
 ```json
 {
   "success": true,
   "data": {
-    "livro": "João",
+    "livro": "Juan",
     "capitulo": 3,
     "versiculo": 15,
-    "texto": "..."
+    "texto": "...",
+    "palabras": [
+      {
+        "word": "vida",
+        "meanings": [
+          "existencia",
+          "estado de un ser vivo"
+        ]
+      }
+    ]
   }
 }
 ```
 
-#### Exemplo de erro
+---
+
+# Exemplo de erro
+
 ```json
 {
   "success": false,
@@ -104,19 +166,40 @@ Retorna um versículo aleatório de um capítulo aleatório da Bíblia.
 }
 ```
 
-## Observações
-- A API depende do serviço externo do API.Bible.
-- Em caso de falha no serviço externo, a API retorna erro `502`.
-- O middleware de erro trata erros operacionais e inesperados.
+---
 
-## Scripts disponíveis
-- `npm run dev`: inicia com nodemon
-- `npm start`: inicia com node
+# Observações
 
-## 🛣 Roadmap
+A API depende de serviços externos.
 
-- [x] Estrutura modular
-- [x] Tratamento global de erros
-- [x] Versionamento de rotas
-- [ ] Definição das palavras do versículo
-- [ ] Cache diário do versículo
+- Falhas na API.Bible podem gerar erro 502.
+- Definições de palavras dependem da Lexicala API.
+- O middleware global de erros trata falhas operacionais e erros inesperados.
+
+---
+
+# Scripts disponíveis
+
+```
+npm run dev
+```
+
+Inicia o servidor em modo desenvolvimento utilizando nodemon.
+
+```
+npm start
+```
+
+Inicia o servidor em modo produção.
+
+---
+
+# Roadmap
+
+- [X] Estrutura modular
+- [X] Tratamento global de erros
+- [X] Versionamento de rotas
+- [X] Definição das palavras do versículo
+- Melhor filtragem das definições retornadas pela API de dicionário
+- Interface web simples para visualização dos versículos
+- Cache diário do versículo
